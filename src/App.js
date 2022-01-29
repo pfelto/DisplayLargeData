@@ -1,41 +1,32 @@
+import { PartyList } from "./component/PartyList";
+import { useMediaQuery } from "./hooks/useMediaQuery";
+
 function App() {
+  const isNarrow = useMediaQuery("(max-height: 900px)");
+  //console.log(isNarrow);
   return (
-    <div className="App">
-      <div className="listContainer">
-        <div className="listItem">1</div>
-        <div className="listItem">2</div>
-        <div className="listItem">3</div>
-        <div className="listItem">4</div>
-        <div className="listItem">5</div>
-        <div className="listItem">6</div>
-        <div className="listItem">7</div>
-        <div className="listItem">8</div>
-        <div className="listItem">9</div>
-        <div className="listItem">10</div>
-        <div className="listItem">11</div>
-        <div className="listItem">12</div>
-        <div className="listItem">13</div>
-        <div className="listItem">14</div>
-        <div className="listItem">15</div>
-        <div className="listItem">16</div>
-        <div className="listItem">17</div>
-        <div className="listItem">18</div>
-        <div className="listItem">19</div>
-        <div className="listItem">20</div>
-        <div className="listItem">21</div>
-        <div className="listItem">22</div>
-        <div className="listItem">23</div>
-        <div className="listItem">24</div>
-        <div className="listItem">25</div>
-        <div className="listItem">26</div>
-        <div className="listItem">27</div>
-        <div className="listItem">28</div>
-        <div className="listItem">29</div>
-        <div className="listItem">30</div>
-      </div>
-      <div className="listNavigation">
-        <button>Back</button>
-        <button>Forward</button>
+    <div
+      style={{
+        backgroundColor: "lightgray",
+        width: "100vw",
+        height: !isNarrow ? "100vh" : "100%",
+        maxWidth: "100%",
+        padding: "2vh 5vw",
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(1, minmax(min-content, 1fr))",
+          backgroundColor: "lavender",
+          borderRadius: "10px",
+          padding: "1%",
+        }}
+      >
+        <h1 style={{ textAlign: "center", margin: 0, paddingBottom: "1vh" }}>
+          Pablo and Mya's Wedding Party
+        </h1>
+        <PartyList />
       </div>
     </div>
   );

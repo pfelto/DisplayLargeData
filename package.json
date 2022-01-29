@@ -12,7 +12,9 @@
     "web-vitals": "^2.1.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev:start": "react-scripts start",
+    "dev:sAPI": "json-server --watch db.json --port 3001",
+    "start": "concurrently npm:dev:sAPI npm:dev:start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

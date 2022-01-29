@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,32 +9,4 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.App {
-  display: grid;
-  grid-template-columns: repeat(1, minmax(100px, 1fr));
-  padding: 5px 25px;
-}
-
-.listContainer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.listItem {
-  flex: 1;
-  border: 1px solid black;
-}
-
-.listNavigation {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
 }
