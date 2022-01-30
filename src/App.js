@@ -2,7 +2,7 @@ import { PartyList } from "./component/PartyList";
 import { useMediaQuery } from "./hooks/useMediaQuery";
 
 function App() {
-  const isNarrow = useMediaQuery("(max-height: 900px)");
+  const isNarrow = useMediaQuery("(max-height: 900px) and (max-width: 450px)");
   //console.log(isNarrow);
   return (
     <div
