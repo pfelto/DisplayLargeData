@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useRef } from "react";
 
-export default function PartyListItem({ firstName, lastName, rsvp }) {
+export default function PartyListItem({
+  id,
+  firstName,
+  lastName,
+  rsvp,
+  handleChange,
+}) {
+  const checkRef = useRef(rsvp);
+
   return (
     <div style={{ flex: 1, border: "1px solid black" }}>
-      {firstName + " "} {lastName + " "}RSVP'd: {rsvp ? "yes" : "no"}
+      {firstName + " "} {lastName}
+      <div>
+        <label htmlFor="rsvp">RSVP</label>
+        <input
+          id="rvsp"
+          type="checkbox"
+          ref={checkRef}
+          onChange={(e) => handleChange(e, id)}
+        ></input>
+      </div>
     </div>
   );
 }

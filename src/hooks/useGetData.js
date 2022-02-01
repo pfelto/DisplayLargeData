@@ -37,7 +37,7 @@ export function useGetData() {
           }
         }
       );
-    }, 2000);
+    }, 500);
     return () => (_isMounted = false);
   }, [state.currentUrl]);
 
