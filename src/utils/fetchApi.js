@@ -12,6 +12,7 @@ function parseLinkHeader(linkHeader) {
   const linkHeadersArray = linkHeader
     .split(", ")
     .map((header) => header.split("; "));
+  if (linkHeadersArray.length === 1) return;
   const linkHeadersMap = linkHeadersArray.map((header) => {
     const thisHeaderRel = header[1].replace(/"/g, "").replace("rel=", "");
     const thisHeaderUrl = header[0].slice(1, -1);
@@ -23,10 +24,11 @@ function parseLinkHeader(linkHeader) {
 export function paginate(direction, currentURL, dispatch) {
   fetch(currentURL).then((response) => {
     let linkHeaders = parseLinkHeader(response.headers.get("Link"));
+    if (!linkHeaders) return;
     if (!!linkHeaders[direction]) {
       currentURL = linkHeaders[direction];
       //console.log(currentURL);
-      dispatch({ type: "paging", currentUrl: currentURL });
+      dispatch({ type: "urlChange", currentUrl: currentURL });
     }
   });
 }

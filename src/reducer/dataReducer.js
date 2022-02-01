@@ -16,7 +16,7 @@ export const dataReducer = (state, action) => {
         data: null,
         error: action.error,
       };
-    case "paging":
+    case "urlChange":
       return {
         ...state,
         currentUrl: action.currentUrl,

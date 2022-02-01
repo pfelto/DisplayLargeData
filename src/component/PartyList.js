@@ -24,7 +24,7 @@ export const PartyList = () => {
     ) : null;
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <Toolbar />
+      <Toolbar URL={currentUrl} dispatch={dispatch} />
       {PartyListArray}
       <NavigationButtons URL={currentUrl} dispatch={dispatch} />
     </div>

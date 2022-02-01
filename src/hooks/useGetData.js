@@ -11,29 +11,33 @@ export function useGetData() {
     error: null,
   });
 
+  //console.log(state.currentUrl);
+
   useEffect(() => {
     let _isMounted = true;
     if (_isMounted) dispatch({ type: "pending", status: "pending" });
-    fetchApiPagination(state.currentUrl).then(
-      (data) => {
-        if (_isMounted) {
-          dispatch({
-            type: "resolved",
-            status: "resolved",
-            data,
-          });
+    setTimeout(() => {
+      fetchApiPagination(state.currentUrl).then(
+        (data) => {
+          if (_isMounted) {
+            dispatch({
+              type: "resolved",
+              status: "resolved",
+              data,
+            });
+          }
+        },
+        (error) => {
+          if (_isMounted) {
+            dispatch({
+              type: "rejected",
+              status: "rejected",
+              error,
+            });
+          }
         }
-      },
-      (error) => {
-        if (_isMounted) {
-          dispatch({
-            type: "rejected",
-            status: "rejected",
-            error,
-          });
-        }
-      }
-    );
+      );
+    }, 2000);
     return () => (_isMounted = false);
   }, [state.currentUrl]);
 
