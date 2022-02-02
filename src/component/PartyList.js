@@ -1,43 +1,62 @@
-import React from "react";
-import { useGetData } from "../hooks/useGetData";
+import React, { useReducer, useEffect } from "react";
 import NavigationButtons from "./partylistcomponents/NavigationButtons";
 import PartyListItem from "./partylistcomponents/PartyListItem";
 import Toolbar from "./partylistcomponents/Toolbar";
+import { fetchApiPagination } from "../utils/fetchApi";
+import { startingURL } from "../utils/currentUrl";
+
+export const dataReducer = (_, nextState) => nextState;
 
 export const PartyList = () => {
-  const { status, currentUrl, data, error, dispatch } = useGetData();
+  const [state, dispatch] = useReducer(dataReducer, {
+    status: "idle",
+    data: null,
+    error: null,
+  });
 
-  function handleChange(e, id) {
-    const poop = data.map((element) => {
-      return element.id === id
-        ? element
-        : { ...element, attending: e.target.checked };
-    });
-    console.log(poop);
-  }
+  //console.log(state.currentUrl);
+
+  useEffect(() => {
+    let _isMounted = true;
+    if (_isMounted) dispatch({ status: "pending" });
+    setTimeout(() => {
+      fetchApiPagination(startingURL).then(
+        (data) => {
+          if (_isMounted) {
+            dispatch({
+              status: "resolved",
+              data,
+            });
+          }
+        },
+        (error) => {
+          if (_isMounted) {
+            dispatch({
+              status: "rejected",
+              error,
+            });
+          }
+        }
+      );
+    }, 500);
+    return () => (_isMounted = false);
+  }, []);
 
   const PartyListArray =
-    status === "resolved" ? (
-      data.map((person) => (
-        <PartyListItem
-          key={person.id}
-          id={person.id}
-          firstName={person.first_name}
-          lastName={person.lastname}
-          rsvp={person.attending}
-          handleChange={handleChange}
-        />
+    state.status === "resolved" ? (
+      state.data.map((person) => (
+        <PartyListItem key={person.id} person={person} />
       ))
-    ) : status === "pending" ? (
+    ) : state.status === "pending" ? (
       <p>Loading...</p>
-    ) : status === "rejected" ? (
-      <p>{error.message}</p>
+    ) : state.status === "rejected" ? (
+      <p>{state.error.message}</p>
     ) : null;
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <Toolbar URL={currentUrl} dispatch={dispatch} />
+      <Toolbar />
       {PartyListArray}
-      <NavigationButtons URL={currentUrl} dispatch={dispatch} />
+      <NavigationButtons />
     </div>
   );
 };

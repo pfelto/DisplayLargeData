@@ -6,7 +6,6 @@ import { currentURL } from "../utils/currentUrl";
 export function useGetData() {
   const [state, dispatch] = useReducer(dataReducer, {
     status: "idle",
-    currentUrl: currentURL,
     data: null,
     error: null,
   });
@@ -17,7 +16,7 @@ export function useGetData() {
     let _isMounted = true;
     if (_isMounted) dispatch({ type: "pending", status: "pending" });
     setTimeout(() => {
-      fetchApiPagination(state.currentUrl).then(
+      fetchApiPagination(currentURL).then(
         (data) => {
           if (_isMounted) {
             dispatch({
@@ -39,11 +38,10 @@ export function useGetData() {
       );
     }, 500);
     return () => (_isMounted = false);
-  }, [state.currentUrl]);
+  }, []);
 
   return {
     status: state.status,
-    currentUrl: state.currentUrl,
     data: state.data,
     error: state.error,
     dispatch,

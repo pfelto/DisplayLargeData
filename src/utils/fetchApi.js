@@ -28,6 +28,7 @@ export function paginate(direction, currentURL, dispatch) {
     if (!!linkHeaders[direction]) {
       currentURL = linkHeaders[direction];
       //console.log(currentURL);
+      //return currentURL;
       dispatch({ type: "urlChange", currentUrl: currentURL });
     }
   });
