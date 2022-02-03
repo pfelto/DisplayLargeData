@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 
 export default function PartyListItem({
   id,
@@ -7,8 +7,7 @@ export default function PartyListItem({
   rsvp,
   handleChange,
 }) {
-  const checkRef = useRef(rsvp);
-
+  const [isChecked, setIsChecked] = useState(rsvp);
   return (
     <div style={{ flex: 1, border: "1px solid black" }}>
       {firstName + " "} {lastName}
@@ -17,8 +16,11 @@ export default function PartyListItem({
         <input
           id="rvsp"
           type="checkbox"
-          ref={checkRef}
-          onChange={(e) => handleChange(e, id)}
+          checked={isChecked}
+          onChange={(e) => {
+            setIsChecked(e.target.checked);
+            handleChange(e, id);
+          }}
         ></input>
       </div>
     </div>
