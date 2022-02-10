@@ -1,7 +1,10 @@
 import React, { useState, useRef } from "react";
 import { sortAsc } from "../../utils/currentUrl";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export default function Toolbar({ URL, dispatch }) {
+  const isNarrow = useMediaQuery("(max-width: 600px)");
+  console.log(isNarrow);
   const inputRef = useRef(null);
   const [orderAsc, setOrderAsc] = useState(false);
 
@@ -32,6 +35,7 @@ export default function Toolbar({ URL, dispatch }) {
     <div
       style={{
         display: "flex",
+        flexDirection: !isNarrow ? "row" : "column",
         flex: 1,
         border: "1px solid black",
       }}

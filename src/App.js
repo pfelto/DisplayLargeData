@@ -1,15 +1,13 @@
 import { PartyList } from "./component/PartyList";
-import { useMediaQuery } from "./hooks/useMediaQuery";
 
 function App() {
-  const isNarrow = useMediaQuery("(max-height: 900px) and (max-width: 450px)");
   //console.log(isNarrow);
   return (
     <div
       style={{
         backgroundColor: "lightgray",
         width: "100vw",
-        height: !isNarrow ? "100vh" : "100%",
+        minHeight: "100vh",
         maxWidth: "100%",
         padding: "2vh 5vw",
       }}

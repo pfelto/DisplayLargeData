@@ -6,7 +6,7 @@
       "lastname": "Bette",
       "email": "mbette0@washingtonpost.com",
       "gender": "Male",
-      "attending": true,
+      "attending": false,
       "ip_addr": "155.0.65.151"
     },
     {
@@ -7350,7 +7350,7 @@
       "lastname": "Bettington",
       "email": "abettingtonmo@bloglines.com",
       "gender": "Male",
-      "attending": false,
+      "attending": true,
       "ip_addr": "113.180.57.118"
     },
     {
